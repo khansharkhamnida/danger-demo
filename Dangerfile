@@ -33,6 +33,6 @@ if git.modified_files.any? { |f| f.start_with?("src/") } && !git.modified_files.
 end
 
 # Confirmation
-if warnings.empty?
+if warning_count == 0
   message("No warnings found. All checks have passed.")
 end
