@@ -27,7 +27,7 @@ end
 
 # Check 5: Documentation
 
-if git.modified_files.any? { \|f\| f.start_with?("src/") } && !git.modified_files.include?("README.md")
+if git.modified_files.any? { |f| f.start_with?("src/") } && !git.modified_files.include?("README.md")
   warn("Update README")
   warning_count += 1
 end
