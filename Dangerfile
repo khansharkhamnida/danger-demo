@@ -1,17 +1,36 @@
+warning_count = 0
+
 # Check 1: PR Description
-warn("Add a description") if github.pr_body.empty?
+if github.pr_body.empty?
+  warn("Add a description")
+  warning_count += 1
+end
 
 # Check 2: PR Title
-warn("Title too short") if github.pr_title.length < 10
+
+if github.pr_title.length < 10
+  warning_count += 1
+  warn("Title too short") 
+end
 
 # Check 3: PR Labels
-warn("PR is too large") if git.lines_of_code > 500
+if git.lines_of_code > 500
+  warn("PR is too large") 
+  warning_count += 1
+end
 
 # Check 4: PR Size
-warn("PR is too large") if git.lines_of_code > 500
+if git.lines_of_code > 500
+  warn("PR is too large")
+  warning_count += 1
+end
 
 # Check 5: Documentation
-warn("Update README") if git.modified_files.any? { \|f\| f.start_with?("src/") } && !git.modified_files.include?("README.md")
+
+if git.modified_files.any? { \|f\| f.start_with?("src/") } && !git.modified_files.include?("README.md")
+  warn("Update README")
+  warning_count += 1
+end
 
 # Confirmation
 if warnings.empty?
